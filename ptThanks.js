@@ -1,8 +1,11 @@
 // ==UserScript==
-// @name        PTthanks
-// @namespace   @github.com/impressioncr
+// @name        PTsign&thanks
+// @namespace   @github.com/lizhenghlh
 // @description pt自动感谢,自动签到
 // @include     *tp.m-team*
+// @include     *ourbits*
+// @include     *hdhome*
+// @include     *hdupt*
 // @include     *totheglory*
 // @include     *-vid.com*
 // @include     *hdchina*
@@ -47,6 +50,12 @@
       var btm = bm.getElementsByTagName('input')[0]
     }
     var fl = document.getElementById('thanks_button') || ''
+    var ourSign = document.getElementsByClassName('faqlink')[0] || ''
+    var hdhomeSign = document.getElementsByClassName('faqlink')[0] || ''
+    var hdu = document.getElementById('qiandao') || ''
+    if (hdu) {
+        var hduSign = hdu.firstChild
+    }
     btnList = [
       mtBtn,
       ttgSign,
@@ -58,7 +67,9 @@
       x264,
       hdc,
       btm,
-      fl
+      fl,
+      ourSign,
+      hdhomeSign
     ]
     // the sites
     if (window.location.host.indexOf('the') === 0) {
@@ -77,6 +88,9 @@
         var torrentId = window.location.search.slice(4)
         window.location.href = 'thanks.php?fid=' + torrentId
       }
+    }
+    if (window.location.host.indexOf('hdu') != -1) {
+      qiandao('qiandao')
     }
     btnList.forEach(function (btn) {
       var click = url === window.sessionStorage.getItem('url')
