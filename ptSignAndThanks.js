@@ -7,7 +7,6 @@
 // @include     *totheglory*
 // @include     *hdchina*
 // @include     *chdbits*
-// @include     *hdsky*
 // @grant none
 // @version     1.1
 // ==/UserScript==
