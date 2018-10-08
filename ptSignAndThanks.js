@@ -1,14 +1,13 @@
 // ==UserScript==
-// @name        PTsign&thanks
+// @name        PTsign
 // @description pt 自动签到
-// @include     *ourbits*
 // @include     *hdhome*
+// @include     *ourbits*
 // @include     *hdupt*
 // @include     *totheglory*
-// @include     *hdchina*
-// @include     *chdbits*
 // @grant none
-// @version     1.1
+// @version     1.2
+// @namespace @github.com/lizhenghlh
 // ==/UserScript==
 (function (window) {
   var url = window.location.href
@@ -25,24 +24,26 @@
     if (hdu) {
         var hduSign = hdu.firstChild
     }
+    //var hdStreetSign = document.getElementById('game') || ''
     btnList = [
-      ttgSign,
+      //ttgSign,
       hdc,
-      ourSign,
-      hduSign,
-      hdhomeSign
+      //ourSign,
+      //hduSign,
+      //hdhomeSign
+      //hdStreetSign
     ]
     if (window.location.host.indexOf('hdu') != -1) {
       qiandao('qiandao')
     }
-    btnList.forEach(function (btn) {
-      var click = url === window.sessionStorage.getItem('url')
-      if (btn && !click) {
-        setTimeout(function() {
-          window.sessionStorage.setItem('url', url)
-          btn.click()
-        }, 500)
-      }
-    })
+    if (window.location.host.indexOf('ourbits') != -1 && ourSign.innerText.indexOf('签到得魔力') != -1) {
+      ourSign.click()
+    }
+    if (window.location.host.indexOf('hdhome') != -1 && hdhomeSign.innerText.indexOf('签到得魔力') != -1) {
+      hdhomeSign.click()
+    }
+    if (window.location.host.indexOf('totheglory') != -1 && ttgSign.innerText.indexOf('签到') != -1) {
+      ttgSign.click()
+    }
   }, 500)
 })(window)
